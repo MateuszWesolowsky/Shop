@@ -1,7 +1,9 @@
+import "./styles/theme.css";
+import "./styles/globa.css";
+
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "./styles/theme.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([

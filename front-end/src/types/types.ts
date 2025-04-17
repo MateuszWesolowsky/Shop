@@ -11,3 +11,8 @@ export interface ProductTypes {
   description: string;
   maintenanceInfo: string;
 }
+
+export interface AccordionItems {
+  title: string;
+  content: string;
+}

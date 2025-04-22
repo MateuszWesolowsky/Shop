@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import { CategoryMenu } from "../CategoryMenu/CategoryMenu";
 import { CurrencySelector } from "../CurrencySelector/CurrencySelector";
 import { Footer } from "../Footer/Footer";
@@ -7,12 +6,9 @@ import { Logo } from "../Logo/Logo";
 import { MainContent } from "../MainContent/MainContent";
 import { MainMenu } from "../MainMenu/MainMenu";
 import { TopBar } from "../TopBar/TopBar";
+import { Outlet } from "react-router-dom";
 
-interface Props {
-  children?: ReactNode;
-}
-
-export const Layout = ({ children }: Props) => (
+export const Layout = () => (
   <>
     <MainContent>
       <TopBar>
@@ -24,7 +20,7 @@ export const Layout = ({ children }: Props) => (
         </div>
       </TopBar>
       <CategoryMenu />
-      {children}
+      <Outlet />
     </MainContent>
     <Footer />
   </>

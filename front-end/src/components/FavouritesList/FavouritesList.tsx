@@ -2,20 +2,20 @@ import { CenteredContent } from "../CenteredContent/CenteredContent";
 import { FavouriteProduct } from "../FavouriteProduct/FavouriteProduct";
 import styles from "./FavouritesList.module.css";
 
-import { ProductTypes } from "../../types/types";
+import { FavouriteProductTypes } from "../../types/types";
 
 interface Props {
-  products: ProductTypes[];
+  favourites: FavouriteProductTypes[];
 }
 
-export const FavouritesList = ({ products }: Props) => {
+export const FavouritesList = ({ favourites }: Props) => {
   return (
     <CenteredContent>
       <div className={styles.favouritesList}>
         <h2>Ulubione</h2>
         <div>
-          {products.map((el) => (
-            <FavouriteProduct key={el.id} product={el} />
+          {favourites.map((favourite) => (
+            <FavouriteProduct key={favourite.id} favourite={favourite} />
           ))}
         </div>
       </div>

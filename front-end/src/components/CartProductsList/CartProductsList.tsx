@@ -12,10 +12,10 @@ export const CartProductsList = ({ products }: Props) => {
   return (
     <CenteredContent>
       <div className={styles.favouritesList}>
-        <h2>Ulubione</h2>
+        <h2>Koszyk</h2>
         <div>
           {products.map((el) => (
-            <CartProduct key={el.id} product={el} />
+            <CartProduct key={Math.random() * 5} product={el} />
           ))}
         </div>
       </div>

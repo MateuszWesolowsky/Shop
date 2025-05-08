@@ -10,9 +10,9 @@ export const Pagination = ({ numberOfPages }: Props) => {
 
   return (
     <ul className={styles.pagination}>
-      {pages.map((page, index) => (
+      {pages.map((_, index) => (
         <li key={index}>
-          <NavLink>{index + 1}</NavLink>
+          <NavLink to={`?page=${index + 1}`}>{index + 1}</NavLink>
         </li>
       ))}
     </ul>

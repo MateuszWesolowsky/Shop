@@ -10,8 +10,23 @@ import { Layout } from "./components/Layout/Layout.tsx";
 import { mainPageLoader } from "./api/mainPageLoader.ts";
 import { ProductsList } from "./views/ProductsList/ProductsList.tsx";
 import { productListLoader } from "./api/productListLoader.ts";
+import { ProductDetails } from "./views/ProductDetails/ProductDetails.tsx";
+import { productLoader } from "./api/productLoader.ts";
+import { addProductToFavouritesAction } from "./api/addProductToFavouritesAction.ts";
+import { favouritesLoader } from "./api/favouritesLoader.ts";
+import { deleteFavouriteAction } from "./api/deleteFavouriteAction.ts";
+import { Provider } from "react-redux";
+import { store } from "./store/store.ts";
 
 const router = createBrowserRouter([
+  {
+    path: "/add-to-favourites/:productId",
+    action: addProductToFavouritesAction,
+  },
+  {
+    path: "/delete-from-favourites/:favouriteId",
+    action: deleteFavouriteAction,
+  },
   {
     path: "",
     element: <Layout />,
@@ -23,6 +38,7 @@ const router = createBrowserRouter([
       {
         path: "/ulubione",
         element: <Favourites />,
+        loader: favouritesLoader,
       },
       {
         path: "/:gender?",
@@ -34,12 +50,19 @@ const router = createBrowserRouter([
         element: <ProductsList />,
         loader: productListLoader,
       },
+      {
+        path: "/:gender/:category/:subcategory/:productId",
+        element: <ProductDetails />,
+        loader: productLoader,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <Provider store={store}>
+      <RouterProvider router={router}></RouterProvider>
+    </Provider>
   </StrictMode>
 );

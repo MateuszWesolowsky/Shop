@@ -2,8 +2,12 @@ import { LoaderFunctionArgs, redirect } from "react-router-dom";
 import { BACK_END_URL, PATH_TO_ENDPOINT_MAPPING } from "../constatns/api";
 import { CATEGORIES } from "../constatns/categories";
 
-export const productListLoader = ({ params }: LoaderFunctionArgs) => {
+export const productListLoader = ({ params, request }: LoaderFunctionArgs) => {
   const { gender, category, subcategory } = params;
+
+  const pageUrl = new URL(request.url);
+
+  const page = pageUrl.searchParams.get("page") || 1;
 
   const foundCategory = CATEGORIES.find((c) => c.path === category);
   const foundGender =
@@ -24,7 +28,19 @@ export const productListLoader = ({ params }: LoaderFunctionArgs) => {
       }
     }
 
-    return fetch(url);
+    url = `${url}&_limit=8&_page=${page}`;
+
+    return fetch(url).then((response) => {
+      const numberOfPages = Math.ceil(
+        Number(response.headers.get("X-Total-Count")) / 8
+      );
+      return response.json().then((products) => {
+        return {
+          products,
+          numberOfPages,
+        };
+      });
+    });
   } else {
     return redirect("/kobieta");
   }
